@@ -1,5 +1,5 @@
 all:
-	cc 1.c -o 1
-	cc 1.2.c -o 1.2
+	cc 1.c -o 1.e
+	cc 1.2.c -o 1.2.e
 clean:
-	rm -rf 1 1.2
+	rm -rf 1.e 1.2.e
