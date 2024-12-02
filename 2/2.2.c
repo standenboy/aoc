@@ -23,6 +23,19 @@ void reverse(int *arr, int len){
 	free(tmp);
 }
 
+int *removen(int *arr, int len, int n){
+	int *out = malloc(sizeof(int) * len - 1);
+
+	int index = 0;
+	for (int i = 0; i < len; i++){
+		out[index] = arr[i];
+		if (i != n) index++;
+	}
+
+	return out;
+}
+
+
 bool issafe(int *arr, int len){
 	int size = sizeof(int) * len;
 	int *sorted = malloc(size);
@@ -70,7 +83,16 @@ int main(){
 			tok = strtok(NULL, " ");
 		} while (tok != NULL);
 
-		total += issafe(arr, i);	
+		bool result = issafe(arr, i);	
+		if (result != true) {
+			for (int x = 0; x < i; x++){
+				int *tmp = removen(arr, i, x);
+				result = issafe(tmp, i - 1);
+				free(tmp);
+				if (result == true) break;
+			}
+		}
+		total += result;
 
 		free(arr);
 	}
